@@ -13,36 +13,34 @@ p. Analyzers are (generally) composed of a single @Tokenizer@ and zero or more @
 p. Here is a sample configuration:
 
 <pre class="prettyprint">
-index :
-    analysis :
-        analyzer : 
-            standard : 
-                type : standard
-                stopwords : [stop1, stop2]
-            myAnalyzer1 :
-                type : standard
-                stopwords : [stop1, stop2, stop3]
-                max_token_length : 500
-            # configure a custom analyzer which is 
-            # exactly like the default standard analyzer
-            myAnalyzer2 :
-                tokenizer : standard
-                filter : [standard, lowercase, stop]
-        tokenizer :
-            myTokenizer1 :
-                type : standard
-                max_token_length : 900
-            myTokenizer2 :
-                type : keyword
-                buffer_size : 512
-        filter :
-            myTokenFilter1 :
-                type : stop
-                stopwords : [stop1, stop2, stop3, stop4]
-            myTokenFilter2 :
-                type : length
-                min : 0
-                max : 2000
+index.analysis.analyzer : 
+    standard : 
+        type : standard
+        stopwords : [stop1, stop2]
+    myAnalyzer1 :
+        type : standard
+        stopwords : [stop1, stop2, stop3]
+        max_token_length : 500
+    # configure a custom analyzer which is 
+    # exactly like the default standard analyzer
+    myAnalyzer2 :
+        tokenizer : standard
+        filter : [standard, lowercase, stop]
+index.analysis.tokenizer :
+    myTokenizer1 :
+        type : standard
+        max_token_length : 900
+    myTokenizer2 :
+        type : keyword
+        buffer_size : 512
+index.analysis.filter :
+    myTokenFilter1 :
+        type : stop
+        stopwords : [stop1, stop2, stop3, stop4]
+    myTokenFilter2 :
+        type : length
+        min : 0
+        max : 2000
 </pre>
 
 p. All analyzers, tokenizers, and token filters can be configured with a @version@ parameter to control which Lucene version behavior they should use. Possible values are: @3.0@ - @3.6@, @4.0@ - @4.3@ (the highest version number is the default option).
@@ -76,10 +74,8 @@ h1. Aliasing Analyzers
 p. Analyzers can be aliased to have several registered lookup names associated with them. For example:
 
 <pre class="prettyprint">
-index :
-  analysis :
-    analyzer :
-      standard :
+index.analysis.analyzer :
+    standard :
         alias: [alias1, alias2]
         type : standard
         stopwords : [test1, test2, test3]
